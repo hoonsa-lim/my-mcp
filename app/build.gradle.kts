@@ -13,6 +13,7 @@ val slf4jVersion = "2.0.9"
 dependencies {
     implementation("org.apache.commons:commons-text")
     implementation(project(":utilities"))
+    implementation(project(":figma"))
     
     // MCP 관련 의존성
     implementation("io.modelcontextprotocol:kotlin-sdk:$mcpVersion")

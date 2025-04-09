@@ -27,6 +27,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "my-mcp"
 include("app")
+include("figma")
 include("list")
 include("utilities")
 include("buildSrc")
