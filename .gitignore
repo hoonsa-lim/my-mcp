@@ -76,3 +76,6 @@ $RECYCLE.BIN/
 *.log
 config.json
 .env
+
+# Figma specific
+figma.properties

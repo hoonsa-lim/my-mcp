@@ -1,6 +1,7 @@
 package com.example.figma
 
 import com.example.figma.api.FigmaApi
+import com.example.figma.config.FigmaConfig
 import com.google.gson.Gson
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -8,13 +9,14 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-class FigmaClientImpl(
-    private val apiToken: String
-) : FigmaClient {
+class FigmaClientImpl : FigmaClient {
     private val api: FigmaApi
     private val gson = Gson()
+    private val apiToken: String
 
     init {
+        apiToken = FigmaConfig.getApiToken()
+        
         val loggingInterceptor = HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         }
