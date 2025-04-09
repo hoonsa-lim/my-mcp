@@ -6,6 +6,8 @@ val mcpVersion = "0.4.0"
 val slf4jVersion = "2.0.9"
 val retrofitVersion = "2.9.0"
 val okhttpVersion = "4.12.0"
+val mockkVersion = "1.13.9"
+val kotlinTestVersion = "1.9.22"
 
 dependencies {
     implementation(project(":utilities"))
@@ -19,4 +21,9 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
     implementation("com.squareup.okhttp3:okhttp:$okhttpVersion")
     implementation("com.squareup.okhttp3:logging-interceptor:$okhttpVersion")
+    
+    // 테스트 의존성
+    testImplementation("io.mockk:mockk:$mockkVersion")
+    testImplementation("org.jetbrains.kotlin:kotlin-test:$kotlinTestVersion")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlinTestVersion")
 } 
