@@ -75,7 +75,6 @@ $RECYCLE.BIN/
 .mcp/
 *.log
 config.json
-.env
 
-# Figma specific
-figma.properties
+# Environment variables
+.env
