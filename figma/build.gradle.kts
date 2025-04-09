@@ -14,7 +14,7 @@ dependencies {
     implementation(project(":utilities"))
     
     // MCP 관련 의존성
-    implementation("io.modelcontextprotocol:kotlin-sdk:$mcpVersion")
+    implementation("io.modelcontextprotocol:mcp-sdk-kotlin:$mcpVersion")
     implementation("org.slf4j:slf4j-nop:$slf4jVersion")
     
     // 코루틴

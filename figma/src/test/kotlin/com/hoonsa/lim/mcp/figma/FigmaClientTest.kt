@@ -1,6 +1,8 @@
 package com.hoonsa.lim.mcp.figma
 
-import com.hoonsa.lim.mcp.figma.api.FigmaApi
+import io.modelcontextprotocol.sdk.client.ClientSession
+import io.modelcontextprotocol.sdk.common.ToolCall
+import io.modelcontextprotocol.sdk.common.ToolResult
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
@@ -9,17 +11,29 @@ import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
 class FigmaClientTest {
-    private lateinit var figmaApi: FigmaApi
     private lateinit var figmaClient: FigmaClient
+    private lateinit var mockSession: ClientSession
     
     @BeforeEach
     fun setup() {
-        figmaApi = mockk()
-        figmaClient = FigmaClientImpl()
+        mockSession = mockk()
+        figmaClient = FigmaClientImpl("test-token")
     }
     
     @Test
-    fun `getFile은 Figma 파일 정보를 반환합니다`() = runBlocking {
+    fun `initialize should set MCP session`() = runBlocking {
+        // given
+        val session = mockk<ClientSession>()
+        
+        // when
+        figmaClient.initialize(session)
+        
+        // then
+        // No exception should be thrown
+    }
+    
+    @Test
+    fun `getFile should return Figma file information`() = runBlocking {
         // given
         val fileId = "test_file_id"
         val expectedResponse = """{"name":"Test File","lastModified":"2024-04-09"}"""
@@ -32,7 +46,7 @@ class FigmaClientTest {
     }
     
     @Test
-    fun `getComments는 Figma 파일의 댓글을 반환합니다`() = runBlocking {
+    fun `getComments should return Figma file comments`() = runBlocking {
         // given
         val fileId = "test_file_id"
         val expectedResponse = """{"comments":[{"id":"1","text":"Test comment"}]}"""
@@ -45,7 +59,7 @@ class FigmaClientTest {
     }
     
     @Test
-    fun `updateDesign은 Figma 디자인 업데이트 결과를 반환합니다`() = runBlocking {
+    fun `updateDesign should return update result`() = runBlocking {
         // given
         val fileId = "test_file_id"
         val changes = mapOf("key" to "value")
@@ -56,5 +70,66 @@ class FigmaClientTest {
         
         // then
         assertEquals(expectedResponse, result)
+    }
+    
+    @Test
+    fun `handleToolCall should handle getFigmaFile tool call`() = runBlocking {
+        // given
+        val fileId = "test_file_id"
+        val expectedResponse = """{"name":"Test File","lastModified":"2024-04-09"}"""
+        val toolCall = ToolCall("test-id", "getFigmaFile", mapOf("fileId" to fileId))
+        
+        // when
+        val result = figmaClient.handleToolCall(toolCall)
+        
+        // then
+        assertEquals("getFigmaFile", result.name)
+        assertEquals(expectedResponse, result.content)
+    }
+    
+    @Test
+    fun `handleToolCall should handle getFigmaComments tool call`() = runBlocking {
+        // given
+        val fileId = "test_file_id"
+        val expectedResponse = """{"comments":[{"id":"1","text":"Test comment"}]}"""
+        val toolCall = ToolCall("test-id", "getFigmaComments", mapOf("fileId" to fileId))
+        
+        // when
+        val result = figmaClient.handleToolCall(toolCall)
+        
+        // then
+        assertEquals("getFigmaComments", result.name)
+        assertEquals(expectedResponse, result.content)
+    }
+    
+    @Test
+    fun `handleToolCall should handle updateFigmaDesign tool call`() = runBlocking {
+        // given
+        val fileId = "test_file_id"
+        val changes = mapOf("key" to "value")
+        val expectedResponse = """{"status":"success"}"""
+        val toolCall = ToolCall("test-id", "updateFigmaDesign", mapOf(
+            "fileId" to fileId,
+            "changes" to changes
+        ))
+        
+        // when
+        val result = figmaClient.handleToolCall(toolCall)
+        
+        // then
+        assertEquals("updateFigmaDesign", result.name)
+        assertEquals(expectedResponse, result.content)
+    }
+    
+    @Test
+    fun `handleToolCall should throw exception for unknown tool`() = runBlocking {
+        // given
+        val toolCall = ToolCall("test-id", "unknownTool", emptyMap())
+        
+        // when/then
+        val exception = assertThrows<IllegalArgumentException> {
+            figmaClient.handleToolCall(toolCall)
+        }
+        assertEquals("Unknown tool: unknownTool", exception.message)
     }
 } 
