@@ -10,5 +10,23 @@ plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "0.9.0"
 }
 
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        mavenCentral()
+    }
+}
+
+dependencyResolutionManagement {
+    versionCatalogs {
+        create("libs") {
+            from(files("../gradle/libs.versions.toml"))
+        }
+    }
+}
+
 rootProject.name = "my-mcp"
-include("app", "list", "utilities")
+include("app")
+include("list")
+include("utilities")
+include("buildSrc")

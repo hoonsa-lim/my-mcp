@@ -4,6 +4,7 @@
 
 plugins {
     id("buildlogic.kotlin-application-conventions")
+    id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
 val mcpVersion = "0.4.0"
