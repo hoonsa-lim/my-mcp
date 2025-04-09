@@ -1,4 +1,4 @@
-package com.example.figma.config
+package com.hoonsa.lim.mcp.figma.config
 
 import io.mockk.every
 import io.mockk.mockkStatic

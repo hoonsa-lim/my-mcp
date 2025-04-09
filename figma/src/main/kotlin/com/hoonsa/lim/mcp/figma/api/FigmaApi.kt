@@ -1,4 +1,4 @@
-package com.example.figma.api
+package com.hoonsa.lim.mcp.figma.api
 
 import retrofit2.http.*
 

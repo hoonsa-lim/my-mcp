@@ -1,4 +1,4 @@
-package com.example.figma
+package com.hoonsa.lim.mcp.figma
 
 interface FigmaClient {
     suspend fun getFile(fileId: String): String

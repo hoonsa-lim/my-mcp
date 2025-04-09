@@ -1,4 +1,4 @@
-package com.example.figma
+package com.hoonsa.lim.mcp.figma
 
 import io.modelcontextprotocol.kotlin.sdk.Tool
 import io.modelcontextprotocol.kotlin.sdk.ToolUnion
@@ -8,7 +8,7 @@ class FigmaTools(
 ) {
     @Tool(
         name = "getFigmaFile",
-        description = "Figma 파일의 정보를 가져옵니다.",
+        description = "Figma 파일 정보를 가져옵니다",
         inputSchema = """
             {
                 "type": "object",
@@ -28,7 +28,7 @@ class FigmaTools(
 
     @Tool(
         name = "getFigmaComments",
-        description = "Figma 파일의 댓글을 가져옵니다.",
+        description = "Figma 파일의 댓글을 가져옵니다",
         inputSchema = """
             {
                 "type": "object",
@@ -48,7 +48,7 @@ class FigmaTools(
 
     @Tool(
         name = "updateFigmaDesign",
-        description = "Figma 디자인을 업데이트합니다.",
+        description = "Figma 디자인을 업데이트합니다",
         inputSchema = """
             {
                 "type": "object",

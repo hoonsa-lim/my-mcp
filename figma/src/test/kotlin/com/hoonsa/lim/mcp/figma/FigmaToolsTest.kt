@@ -1,4 +1,4 @@
-package com.example.figma
+package com.hoonsa.lim.mcp.figma
 
 import io.mockk.coEvery
 import io.mockk.mockk

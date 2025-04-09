@@ -1,6 +1,6 @@
-package com.example.figma
+package com.hoonsa.lim.mcp.figma
 
-import com.example.figma.api.FigmaApi
+import com.hoonsa.lim.mcp.figma.api.FigmaApi
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
