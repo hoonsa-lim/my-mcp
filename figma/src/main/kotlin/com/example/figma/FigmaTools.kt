@@ -1,7 +1,7 @@
 package com.example.figma
 
-import io.modelcontextprotocol.sdk.tools.Tool
-import io.modelcontextprotocol.sdk.tools.ToolUnion
+import io.modelcontextprotocol.kotlin.sdk.Tool
+import io.modelcontextprotocol.kotlin.sdk.ToolUnion
 
 class FigmaTools(
     private val figmaClient: FigmaClient

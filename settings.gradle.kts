@@ -5,23 +5,19 @@
  * For more detailed information on multi-project builds, please refer to https://docs.gradle.org/8.13/userguide/multi_project_builds.html in the Gradle documentation.
  */
 
-plugins {
-    // Apply the foojay-resolver plugin to allow automatic download of JDKs
-    id("org.gradle.toolchains.foojay-resolver-convention") version "0.9.0"
-}
-
 pluginManagement {
     repositories {
         gradlePluginPortal()
         mavenCentral()
     }
+    plugins {
+        id("org.gradle.toolchains.foojay-resolver-convention") version "0.7.0"
+    }
 }
 
 dependencyResolutionManagement {
-    versionCatalogs {
-        create("libs") {
-            from(files("../gradle/libs.versions.toml"))
-        }
+    repositories {
+        mavenCentral()
     }
 }
 
@@ -30,4 +26,3 @@ include("app")
 include("figma")
 include("list")
 include("utilities")
-include("buildSrc")
