@@ -8,7 +8,6 @@ plugins {
 
 val mcpVersion = "0.4.0"
 val slf4jVersion = "2.0.9"
-val anthropicVersion = "0.8.0"
 
 dependencies {
     implementation("org.apache.commons:commons-text")
@@ -17,7 +16,6 @@ dependencies {
     // MCP 관련 의존성
     implementation("io.modelcontextprotocol:kotlin-sdk:$mcpVersion")
     implementation("org.slf4j:slf4j-nop:$slf4jVersion")
-    implementation("com.anthropic:anthropic-java:$anthropicVersion")
 }
 
 application {
